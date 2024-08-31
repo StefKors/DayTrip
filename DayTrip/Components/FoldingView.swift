@@ -13,35 +13,9 @@ import MapKit
 
 
 struct FoldingView: View {
-    @EnvironmentObject var manager: LocationManager
-
-    @State private var showToolbar: Bool = false
+    @EnvironmentObject private var manager: LocationManager
 
     @State private var toolbarState: ToolbarViewState = .mini
-
-    @Namespace private var animation
-
-    var height: CGFloat {
-        switch toolbarState {
-        case .mini:
-            return 100
-        case .medium:
-            return 200
-        case .full:
-            return 600
-        }
-    }
-
-    var otherHeight: CGFloat {
-        switch toolbarState {
-        case .mini:
-            return 0
-        case .medium:
-            return 200
-        case .full:
-            return 600
-        }
-    }
 
     var body: some View {
         MapRouteView()
@@ -50,22 +24,17 @@ struct FoldingView: View {
             }, onSwipeDown: { newDetent in
                 toolbarState = toolbarState.previous()
             }, sheetContent: {
-                        VStack {
-                            VStack(alignment: .leading) {
-                                VStack(alignment: .leading) {
-                                    RecordingTools()
+                VStack {
+                    VStack(alignment: .leading) {
+                        VStack(alignment: .leading) {
+                            RecordingTools()
 
-                                    RouteListView()
-                                }
-                            }
+                            RouteListView()
                         }
-                        .animation(.snappy, value: manager.status)
-            })
-            .onAppear {
-                withAnimation(.smooth.delay(0.5)) {
-                    showToolbar = true
+                    }
                 }
-            }
+                .animation(.snappy, value: manager.status)
+            })
     }
 }
 
