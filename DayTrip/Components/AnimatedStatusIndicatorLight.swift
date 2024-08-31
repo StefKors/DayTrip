@@ -36,3 +36,7 @@ struct AnimatedStatusIndicatorLight: View {
             }
     }
 }
+
+#Preview {
+    AnimatedStatusIndicatorLight()
+}

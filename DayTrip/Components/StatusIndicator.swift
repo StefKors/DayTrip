@@ -13,8 +13,6 @@ import MapKit
 struct StatusIndicator: View {
     @EnvironmentObject var manager: LocationManager
 
-
-
     var body: some View {
         HStack {
             StatusIndicatorLight(isAnimating: manager.status == .recording)
@@ -27,6 +25,7 @@ struct StatusIndicator: View {
         .background {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .fill(.foreground.quinary)
+                .stroke(.foreground.quinary, lineWidth: 1)
         }
     }
 }

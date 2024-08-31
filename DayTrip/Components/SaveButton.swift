@@ -16,13 +16,18 @@ struct SaveButton: View {
 
     var body: some View {
         Button("Save") {
-            do {
-                let route = Route(points: manager.points.map{ $0.toSimpleCoordinate()})
-                modelContext.insert(route)
-                try modelContext.save()
-                manager.status = .ready
-            } catch {
-                print(error.localizedDescription)
+            Task {
+                do {
+                    let points = await manager.points.map{ $0.toSimpleCoordinate()}.asyncMap { loc in
+                        await loc.withReadableName()
+                    }
+                    let route = Route(points: points)
+                    modelContext.insert(route)
+                    try modelContext.save()
+                    manager.status = .ready
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
         }
         .labelStyle(.titleOnly)
@@ -38,4 +43,5 @@ struct SaveButton: View {
 #Preview {
     SaveButton()
         .environmentObject(LocationManager())
+        .modelContainer(DataController.previewContainer)
 }

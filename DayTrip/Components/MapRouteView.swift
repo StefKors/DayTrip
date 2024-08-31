@@ -13,20 +13,26 @@ import MapKit
 struct MapRouteView: View {
     @EnvironmentObject var manager: LocationManager
 
-    var region: MapCameraPosition {
-        MapCameraPosition.region(
-            manager.region
-        )
-    }
-
-    let montblanc = CLLocationCoordinate2D(latitude: 45.832119, longitude: 6.865575)
+    @State private var region: MapCameraPosition = MapCameraPosition.automatic
 
     var body: some View {
-        Map(initialPosition: region) {
-            MapPolyline(coordinates: manager.points, contourStyle: .geodesic)
-                .stroke(.purple, lineWidth: 4)
+        Map(position: $region) {
+            if manager.points.isEmpty == false {
+                MapPolyline(coordinates: manager.points, contourStyle: .geodesic)
+                    .stroke(.purple, lineWidth: 4)
+            }
+
+            if let location = manager.currentLocation {
+                Marker("current", systemImage: "location.fill", coordinate: location.coordinate)
+            }
         }
-        .mapControlVisibility(.hidden)
+        .mapControlVisibility(.visible)
         .edgesIgnoringSafeArea(.all)
+
     }
+}
+
+#Preview {
+    MapRouteView()
+        .environmentObject(LocationManager())
 }

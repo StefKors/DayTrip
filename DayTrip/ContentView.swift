@@ -9,6 +9,10 @@ import SwiftUI
 import SwiftData
 import MapKit
 
+/// Stepcounter: https://developer.apple.com/documentation/coremotion/cmpedometer
+/// + Altimeter
+
+
 @MainActor
 class DataController {
     static let previewContainer: ModelContainer = {

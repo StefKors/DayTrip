@@ -6,12 +6,27 @@
 	objectVersion = 70;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8AB46BDE2C773293006E92A7 /* DistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB46BDD2C773293006E92A7 /* DistanceView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		8A4CDBFD2C64042F0036A67B /* DayTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8AB46BDD2C773293006E92A7 /* DistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		8A942AC92C7728C700D44E7D /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8A4CDBFC2C64042F0036A67B /* DayTrip */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8A4CDBFF2C64042F0036A67B /* DayTrip */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DayTrip; sourceTree = "<group>"; };
+		8A4CDBFF2C64042F0036A67B /* DayTrip */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (8A942AC92C7728C700D44E7D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DayTrip; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,6 +45,7 @@
 			children = (
 				8A4CDBFF2C64042F0036A67B /* DayTrip */,
 				8A4CDBFE2C64042F0036A67B /* Products */,
+				8AB46BDD2C773293006E92A7 /* DistanceView.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -114,6 +130,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AB46BDE2C773293006E92A7 /* DistanceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +267,12 @@
 				DEVELOPMENT_TEAM = RT5BSWJB4U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DayTrip/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We use your location to track your hiking routes, choose your prefered location permissions";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We use your location to track your hiking routes";
+				INFOPLIST_KEY_NSLocationUsageDescription = "We use your location to track hiking routes";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We use your location to track routes while the app is open";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -281,6 +304,12 @@
 				DEVELOPMENT_TEAM = RT5BSWJB4U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DayTrip/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We use your location to track your hiking routes, choose your prefered location permissions";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We use your location to track your hiking routes";
+				INFOPLIST_KEY_NSLocationUsageDescription = "We use your location to track hiking routes";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We use your location to track routes while the app is open";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
