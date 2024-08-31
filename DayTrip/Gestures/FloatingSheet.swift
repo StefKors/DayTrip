@@ -41,17 +41,15 @@ struct FloatingSheetModifier<SheetContent: View>: ViewModifier {
     var verticalEnabled = true
 
     var detents: [FloatingSheetDetent]   = [.height(50), .medium, .large]
-    @State private var currentDetent: FloatingSheetDetent = .medium
+    @State private var currentDetent: FloatingSheetDetent = .height(50)
 
     @ViewBuilder var sheetContent: () -> SheetContent
 
-    @State private var called: Bool = false
+//    @State private var yTranslation: CGFloat = .zero
+//    @State private var yScaling: CGFloat = 1
 
-    @State private var yTranslation: CGFloat = .zero
-    @State private var yScaling: CGFloat = 1
-
-    @State private var xTranslation: CGFloat = .zero
-    @State private var xScaling: CGFloat = 1
+//    @State private var xTranslation: CGFloat = .zero
+//    @State private var xScaling: CGFloat = 1
 
     @State private var dragLimit: CGFloat = 10
 
@@ -59,6 +57,7 @@ struct FloatingSheetModifier<SheetContent: View>: ViewModifier {
 
     var computedHeight: CGFloat {
         let height = currentDetent.height + dragOffset
+        print("\(height.description) dragOffset: \(dragOffset.description) | current: \(currentDetent.height.description)")
         return  height.clamped(lower: 35, upper: height)
     }
 
@@ -90,28 +89,24 @@ struct FloatingSheetModifier<SheetContent: View>: ViewModifier {
                                 .offset(y: -3)
                                 .allowsHitTesting(false)
                         }
-                        .offset(x: xTranslation, y: yTranslation)
+//                        .offset(x: xTranslation, y: yTranslation)
                         .gesture(
                             DragGesture(minimumDistance: 20, coordinateSpace: .global)
                                 .onChanged { value in
                                     dragOffset = value.translation.height * -1
-                                    handleRubberBanding(value)
-
-                                    guard called == false else { return }
-                                    called = true
+//                                    handleRubberBanding(value)
                                 }
                                 .onEnded { value in
-                                    called = false
                                     setNewDetent(value)
-                                    withAnimation(.spring()) {
-                                        yTranslation = .zero
-                                        xTranslation = .zero
-                                        yScaling = 1
-                                        xScaling = 1
-                                    }
+//                                    withAnimation(.spring()) {
+//                                        yTranslation = .zero
+//                                        xTranslation = .zero
+////                                        yScaling = 1
+////                                        xScaling = 1
+//                                    }
                                 }
                         )
-
+                        .animation(.smooth, value: computedHeight)
                 })
 
             .task(id: detents) {
@@ -121,44 +116,44 @@ struct FloatingSheetModifier<SheetContent: View>: ViewModifier {
             }
     }
 
-    func handleRubberBanding(_ value: DragGesture.Value) {
-        if verticalEnabled {
-            let velocityBanding = ((value.velocity.height/10000) * -1).clamped(lower: -0.12, upper: 0.12)
-            if value.translation.height >= dragLimit {
-                // hits limit
-                yTranslation = dragLimit * (1.00 + log10(value.translation.height / dragLimit))/3
-                withAnimation(.spring(blendDuration: 300)) {
-                    yScaling = 1 + velocityBanding
-                }
-            } else if value.translation.height <= (dragLimit * -1) {
-                // below limit
-                yTranslation = (dragLimit * -1) * (1.00 + log10(value.translation.height / (dragLimit * -1)))/3
-                withAnimation(.spring(blendDuration: 300)) {
-                    yScaling = 1 + velocityBanding
-                }
-            } else {
-                // limiter
-                yTranslation = value.translation.height
-            }
-        }
-
-        if horizontalEnabled {
-            let velocityBanding = ((value.velocity.width/10000) * -1).clamped(lower: -0.12, upper: 0.12)
-            if value.translation.width >= dragLimit {
-                xTranslation = dragLimit * (1.00 + log10(value.translation.width / dragLimit))
-                withAnimation(.spring(blendDuration: 300)) {
-                    xScaling = 1 + velocityBanding
-                }
-            } else if value.translation.width <= (dragLimit * -1) {
-                xTranslation = (dragLimit * -1) * (1.00 + log10(value.translation.width / (dragLimit * -1)))
-                withAnimation(.spring(blendDuration: 300)) {
-                    xScaling = 1 + velocityBanding
-                }
-            } else {
-                xTranslation = value.translation.width
-            }
-        }
-    }
+//    func handleRubberBanding(_ value: DragGesture.Value) {
+//        if verticalEnabled {
+//            let velocityBanding = ((value.velocity.height/10000) * -1).clamped(lower: -0.12, upper: 0.12)
+//            if value.translation.height >= dragLimit {
+//                // hits limit
+//                yTranslation = dragLimit * (1.00 + log10(value.translation.height / dragLimit))
+////                withAnimation(.spring(blendDuration: 300)) {
+////                    yScaling = 1 + velocityBanding
+////                }
+//            } else if value.translation.height <= (dragLimit * -1) {
+//                // below limit
+//                yTranslation = (dragLimit * -1) * (1.00 + log10(value.translation.height / (dragLimit * -1)))
+////                withAnimation(.spring(blendDuration: 300)) {
+////                    yScaling = 1 + velocityBanding
+////                }
+//            } else {
+//                // limiter
+//                yTranslation = value.translation.height
+//            }
+//        }
+//
+//        if horizontalEnabled {
+//            let velocityBanding = ((value.velocity.width/10000) * -1).clamped(lower: -0.12, upper: 0.12)
+//            if value.translation.width >= dragLimit {
+//                xTranslation = dragLimit * (1.00 + log10(value.translation.width / dragLimit))
+////                withAnimation(.spring(blendDuration: 300)) {
+////                    xScaling = 1 + velocityBanding
+////                }
+//            } else if value.translation.width <= (dragLimit * -1) {
+//                xTranslation = (dragLimit * -1) * (1.00 + log10(value.translation.width / (dragLimit * -1)))
+////                withAnimation(.spring(blendDuration: 300)) {
+////                    xScaling = 1 + velocityBanding
+////                }
+//            } else {
+//                xTranslation = value.translation.width
+//            }
+//        }
+//    }
 
     func handleCallback(_ value: DragGesture.Value, _ newDetent: FloatingSheetDetent) {
         let horizontalAmount = value.translation.width
@@ -195,7 +190,7 @@ struct FloatingSheetModifier<SheetContent: View>: ViewModifier {
 
         let newDetent = detents[indexOfSmallest]
 
-        withAnimation(.spring(blendDuration: 300)) {
+//        withAnimation(.spring(blendDuration: 300)) {
             print("handleCallback")
             if (currentDetent.height != newDetent.height) {
                 print("handleCallback")
@@ -204,7 +199,7 @@ struct FloatingSheetModifier<SheetContent: View>: ViewModifier {
             currentDetent = newDetent
             dragOffset = 0
 
-        }
+//        }
 
     }
 }

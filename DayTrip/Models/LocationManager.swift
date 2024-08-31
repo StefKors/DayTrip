@@ -30,13 +30,6 @@ final class LocationManager: NSObject, CLLocationManagerDelegate, ObservableObje
 
     @Published var speed: CLLocationSpeed = 0
 
-
-    @Published var region = MKCoordinateRegion(
-        center: .init(latitude: 37.334_900, longitude: -122.009_020),
-        span: .init(latitudeDelta: 0.2, longitudeDelta: 0.2)
-    )
-
-
     override init() {
         super.init()
 
