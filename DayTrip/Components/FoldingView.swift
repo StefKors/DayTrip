@@ -12,13 +12,18 @@ import SwiftData
 import MapKit
 
 
+
 struct FoldingView: View {
     @EnvironmentObject private var manager: LocationManager
 
     @State private var toolbarState: ToolbarViewState = .mini
 
     var body: some View {
-        MapRouteView()
+        ZStack {
+            MapRouteView()
+
+            TrackingRouteView()
+        }
             .floatingSheet(onSwipeUp: { newDetent in
                 toolbarState = toolbarState.next()
             }, onSwipeDown: { newDetent in
