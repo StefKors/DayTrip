@@ -6,13 +6,8 @@
 	objectVersion = 70;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		8AB46BDE2C773293006E92A7 /* DistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB46BDD2C773293006E92A7 /* DistanceView.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		8A4CDBFD2C64042F0036A67B /* DayTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		8AB46BDD2C773293006E92A7 /* DistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -45,7 +40,6 @@
 			children = (
 				8A4CDBFF2C64042F0036A67B /* DayTrip */,
 				8A4CDBFE2C64042F0036A67B /* Products */,
-				8AB46BDD2C773293006E92A7 /* DistanceView.swift */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,7 +124,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AB46BDE2C773293006E92A7 /* DistanceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
